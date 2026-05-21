@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>건축기사 1과목 오답</title>
+<style>
+:root{
+  --bg:#f5f3ee;--card:#fff;--card2:#faf9f6;--bd:#e0ddd6;
+  --tx:#1a1916;--mu:#7a776e;
+  --ac:#2d5a3d;--al:#e8f2eb;
+  --a2:#c8442a;--a2l:#fdf0ee;
+  --ye:#f5c842;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+header{background:var(--ac);color:#fff;padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.13)}
+header h1{font-size:1rem;font-weight:600}
+.hbtn{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:5px 12px;font-size:.77rem;cursor:pointer;font-family:inherit}
+.hbtn:hover{background:rgba(255,255,255,.3)}
+.hbtn.danger{background:rgba(200,68,42,.5);border-color:rgba(200,68,42,.7)}
+.hbtn.danger:hover{background:rgba(200,68,42,.75)}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--bd);padding:0 1.5rem;overflow-x:auto}
+.tab{padding:11px 16px;font-size:.84rem;font-family:inherit;color:var(--mu);background:none;border:none;border-bottom:2.5px solid transparent;cursor:pointer;white-space:nowrap}
+.tab.active{color:var(--ac);border-bottom-color:var(--ac);font-weight:600}
+.main{max-width:760px;margin:0 auto;padding:1.4rem 1rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.15rem}
+.sc{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:11px;text-align:center}
+.sn{font-size:1.5rem;font-weight:700}.sl{font-size:.71rem;color:var(--mu);margin-top:2px}
+.cn{color:var(--ac)}.wn{color:var(--a2)}.fn{color:#c89b00}
+.tbar{display:flex;align-items:center;gap:8px;margin-bottom:.85rem;flex-wrap:wrap}
+.tbtn{padding:6px 12px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:6px;font-size:.77rem;font-family:inherit;cursor:pointer}
+.tbtn:hover{background:var(--al);border-color:var(--ac);color:var(--ac)}
+.tbtn.retry{background:var(--ac);color:#fff;border-color:var(--ac)}
+.tbtn.retry:hover{background:#1e4028}
+.ptxt{font-size:.78rem;color:var(--mu);margin-left:auto}
+.fbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.85rem}
+.fb{padding:5px 12px;background:var(--card);color:var(--mu);border:1px solid var(--bd);border-radius:99px;font-size:.74rem;font-family:inherit;cursor:pointer}
+.fb.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.pw{background:var(--bd);border-radius:99px;height:5px;margin-bottom:1.15rem;overflow:hidden}
+.pf{background:var(--ac);height:100%;border-radius:99px;transition:width .4s}
+.qcard{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.35rem;margin-bottom:.95rem;position:relative}
+.qm{display:flex;align-items:center;gap:8px;margin-bottom:.55rem;flex-wrap:wrap}
+.qn{font-size:.72rem;color:var(--mu);font-weight:600}
+.badge{font-size:.67rem;padding:2px 7px;border-radius:99px;font-weight:600}
+.box{background:#e8f0fb;color:#2456a4}.bmc{background:#f0eafb;color:#6234a4}.bsa{background:#fff3e0;color:#b36200}
+.favb{margin-left:auto;background:none;border:none;cursor:pointer;font-size:1.15rem;color:#d0cdc5;line-height:1;padding:2px}
+.favb.on{color:var(--ye)}
+.ind{position:absolute;top:11px;right:44px;font-size:.72rem;font-weight:600}
+.io{color:var(--ac)}.ix{color:var(--a2)}.ip{color:var(--mu);font-weight:400}
+.qt{font-size:.96rem;line-height:1.68;margin-bottom:.95rem;font-weight:500;white-space:pre-wrap;}
+.mco{display:flex;flex-direction:column;gap:7px}
+.mo{padding:10px 13px;border:1.5px solid var(--bd);border-radius:8px;background:var(--card2);cursor:pointer;text-align:left;font-size:.87rem;font-family:inherit;color:var(--tx);display:flex;align-items:center;gap:10px;line-height:1.5;white-space:pre-wrap;}
+.mo:not([disabled]):hover{background:var(--al);border-color:var(--ac)}
+.mo.sel{background:var(--al);border-color:var(--ac);color:var(--ac);font-weight:600}
+.ol{min-width:20px;height:20px;border-radius:50%;background:var(--bd);color:var(--mu);font-size:.71rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mo.sel .ol{background:var(--ac);color:#fff}
+.fbk{margin-top:.85rem;border-radius:8px;padding:.85rem 1rem;font-size:.84rem;line-height:1.7;display:none}
+.fbk.show{display:block}
+.fbk.ok{background:var(--al);border-left:3px solid var(--ac)}
+.fbk.ng{background:var(--a2l);border-left:3px solid var(--a2)}
+.fbh{font-weight:700;font-size:.91rem;margin-bottom:4px}
+.fbk.ok .fbh{color:var(--ac)}.fbk.ng .fbh{color:var(--a2)}
+.fba{color:var(--mu);font-size:.79rem;margin:3px 0 5px}
+.empty{text-align:center;padding:3.5rem 2rem;color:var(--mu);font-size:.9rem}
+.retry-banner{background:var(--ac);color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.retry-banner p{font-size:.88rem;line-height:1.5}
+.retry-banner button{background:#fff;color:var(--ac);border:none;border-radius:6px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit}
+@media(max-width:600px){.main{padding:1rem .75rem}header{padding:.75rem 1rem}.tabs{padding:0 .75rem}}
+</style>
+</head>
+<body>
+<header>
+  <h1>건축기사 1과목 오답</h1>
+  <button class="hbtn danger" onclick="confirmReset()">초기화</button>
+</header>
+<div class="tabs">
+  <button class="tab active" id="tb-all"   onclick="switchTab(&quot;all&quot;)">전체 문제</button>
+  <button class="tab"        id="tb-fav"   onclick="switchTab(&quot;fav&quot;)">즐겨찾기</button>
+  <button class="tab"        id="tb-wrong" onclick="switchTab(&quot;wrong&quot;)">오답 문제</button>
+</div>
+<div class="main">
+  <div class="stats">
+    <div class="sc"><div class="sn cn" id="sc">0</div><div class="sl">맞힌 문제</div></div>
+    <div class="sc"><div class="sn wn" id="sw">0</div><div class="sl">틀린 문제</div></div>
+    <div class="sc"><div class="sn fn" id="sf">0</div><div class="sl">즐겨찾기</div></div>
+  </div>
+
+  <div id="pv-all">
+    <div class="fbar">
+      <button class="fb on" id="ff-all" onclick="setFilter(&quot;all&quot;)">전체</button>
+      <button class="fb"    id="ff-mc"  onclick="setFilter(&quot;mc&quot;)">객관식</button>
+      <button class="fb"    id="ff-un"  onclick="setFilter(&quot;un&quot;)">미완료</button>
+    </div>
+    <div class="tbar">
+      <button class="tbtn" onclick="doShuffle()">🔀 섞기</button>
+      <button class="tbtn" onclick="doReorder()">↩ 순서복원</button>
+      <span class="ptxt" id="ptxt">0 / 54 완료</span>
+    </div>
+    <div class="pw"><div class="pf" id="pb" style="width:0%"></div></div>
+    <div id="ql"></div>
+  </div>
+
+  <div id="pv-fav" style="display:none">
+    <div class="tbar">
+      <button class="tbtn retry" onclick="retryFav()">&#9654; 즐겨찾기만 다시 풀기</button>
+      <button class="tbtn" id="stop-fav" style="display:none" onclick="clearRetry()">&#10006; 모드 종료</button>
+    </div>
+    <div id="fl"></div>
+  </div>
+
+  <div id="pv-wrong" style="display:none">
+    <div class="tbar">
+      <button class="tbtn retry" onclick="retryWrong()">&#9654; 오답만 다시 풀기</button>
+      <button class="tbtn" id="stop-wrong" style="display:none" onclick="clearRetry()">&#10006; 모드 종료</button>
+    </div>
+    <div id="wl"></div>
+  </div>
+</div>
+
+<script id="qdata" type="application/json">
+[
+  {
+    "id": 1,
+    "type": "mc",
+    "text": "공장건축에 관한 설명으로 옳은 것은?",
+    "answer": "자연환기방식의 경우 환기방법은 채광형식과 관련하여 건물형태를 결정하는 매우 중요한 요소가 된다.",
+    "explanation": "①요철이 적은 것이 유리.\n②재료의 반입과 제품의 반출 동선은 별도로 하는 것이 유리.\n③작업원과 외부인 동선은 별도.",
+    "options": [
+      "계획 시부터 장래증축을 고려하는 것이 필요하며 평면형은 가능한 요철이 많은 것이 유리하다.",
+      "재료반입과 제품반출 동선은 동일하게 하고 물품 동선과 사람 동선은 별도로 하는 것이 바람직하다.",
+      "외부인 동선과 작업원 동선은 동일하게 하고, 견학자는 생산과 교차하지 않는 동선을 확보하도록 한다.",
+      "자연환기방식의 경우 환기방법은 채광형식과 관련하여 건물형태를 결정하는 매우 중요한 요소가 된다."
+    ],
+    "비고": "2017-03-05"
+  },
+  {
+    "id": 2,
+    "type": "mc",
+    "text": "백화점 매장의 배치 유형에 관한 설명으로 옳지 않은 것은?",
+    "answer": "직각형 배치는 고객의 통행량에 따라 통로 폭을 조절하기 용이하다.",
+    "explanation": "직각형 배치는 판매장 면적을 최대한으로 이용하기 때문에 통로폭 조절이 힘들다.",
+    "options": [
+      "직각형 배치는 매장 면적의 이용률을 최대로 확보할 수 있다.",
+      "직각형 배치는 고객의 통행량에 따라 통로 폭을 조절하기 용이하다.",
+      "경사형 배치는 많은 고객이 매장공간의 코너까지 접근하기 용이한 유형이다.",
+      "경사형 배치는 Main 통로를 직각 배치하며, Sub 통로를 45° 정도 경사지게 배치하는 유형이다."
+    ],
+    "비고": "2017-03-05"
+  },
+  {
+    "id": 3,
+    "type": "mc",
+    "text": "바실리카식 교회당의 구성에 속하지 않는 것은?",
+    "answer": "파일론",
+    "explanation": "바실리카식 교회당의 구성: 아일, 트랜샙트, 나르텍스, 앱스, 네이브.\n파일론은 고대 이집트 시기 기념물로 신전 앞에 세운 관문.",
+    "options": [
+      "아일",
+      "파일론",
+      "트란셉트",
+      "나르텍스"
+    ],
+    "비고": "2017-03-05"
+  },
+  {
+    "id": 4,
+    "type": "mc",
+    "text": "다음의 건축물과 양식의 연결이 옳지 않은 것은?",
+    "answer": "노트르담 성당 - 로마네스크 양식",
+    "explanation": "노트르담 성당 - 고딕 양식",
+    "options": [
+      "판테온 - 로마 양식",
+      "파르테논 신전 - 그리스 양식",
+      "성 소피아 성당 - 비잔틴 양식",
+      "노트르담 성당 - 로마네스크 양식"
+    ],
+    "비고": "2017-05-09"
+  },
+  {
+    "id": 5,
+    "type": "mc",
+    "text": "초기 기독교 시기의 바실리카 양식의 본당 평면도에서 회랑의 중앙부분을 나타내는 용어는?",
+    "answer": "네이브(Nave)",
+    "explanation": "①아일: 측면회랑\n②네이브: 중앙회랑\n③아트리움: 중정\n④페디먼트: 그리스 신전의 지붕 장식물",
+    "options": [
+      "아일(Aisle)",
+      "네이브(Nave)",
+      "아트리움(Atrium)",
+      "페디먼트(Pediment)"
+    ],
+    "비고": "2017-05-09"
+  },
+  {
+    "id": 6,
+    "type": "mc",
+    "text": "학교운영방식 중 플래툰형에 관한 설명으로 옳은 것은?",
+    "answer": "교과 담임제와 학급 담임제를 병용할 수 있는 형식이다.",
+    "explanation": "플래툰형: 전 학급을 2분단으로 하고, 한 분단이 일반교실을 사용할 때 다른 분단은 특별교실을 사용하는 방식.\n①③종합교실형(U형) / ④교과교실형(V형)",
+    "options": [
+      "교실수는 학급수와 동일하다.",
+      "초등학교 저학년에 가장 적합한 형식이다.",
+      "교과 담임제와 학급 담임제를 병용할 수 있는 형식이다.",
+      "모든 교실이 특정한 교과 수업을 위해 만들어진 형식으로, 일반교실은 없다."
+    ],
+    "비고": "2017-05-09"
+  },
+  {
+    "id": 7,
+    "type": "mc",
+    "text": "사무소 건축의 기준층 평면형태 결정요소와 가장 거리가 먼 것은?",
+    "answer": "대피상 최소 피난거리",
+    "explanation": "기준층 평면형태 결정요소: 구조상 스팬의 한도, 동선상의 거리, 각종 설비시스템, 방화구획상 면적, 자연광에 의한 조명한계, 대피상 최대 피난거리.\n※ '최소' 피난거리가 아닌 '최대' 피난거리가 결정요소.",
+    "options": [
+      "방화구획상 면적",
+      "구조상 스팬의 한도",
+      "대피상 최소 피난거리",
+      "덕트, 배선, 배관 등 설비 시스템상의 한계"
+    ],
+    "비고": "2017-05-09"
+  },
+  {
+    "id": 8,
+    "type": "mc",
+    "text": "은행의 주출입구에 관한 설명으로 옳지 않은 것은?",
+    "answer": "내부와 면한 출입문은 도난방지상 바깥여닫이로 하는 것이 좋다.",
+    "explanation": "내부와 면한 출입문은 도난방지상 안여닫이로 하는 것이 좋다. 방풍실이 추가되는 경우 바깥문은 바깥여닫이 또는 자재문으로 계획 가능.",
+    "options": [
+      "겨울철의 방풍을 위해 방풍실을 설치하는 것이 좋다.",
+      "내부와 면한 출입문은 도난방지상 바깥여닫이로 하는 것이 좋다.",
+      "이중문을 설치하는 경우, 바깥문은 바깥여닫이 또는 자재문으로 계획할 수 있다.",
+      "어린이들의 출입이 많은 곳에서는 안전을 고려하여 회전문 설치를 배제하는 것이 좋다."
+    ],
+    "비고": "2017-09-23"
+  },
+  {
+    "id": 9,
+    "type": "mc",
+    "text": "불사건축의 진입방법에서 누하진입방식을 취한 것은?",
+    "answer": "부석사",
+    "explanation": "누하진입방식: 부석사, 은혜사, 해인사\n암기팁: '누워서 집에 있으면 얼굴 부은애 된다'",
+    "options": [
+      "부석사",
+      "통도사",
+      "화엄사",
+      "범어사"
+    ],
+    "비고": "2017-09-23"
+  },
+  {
+    "id": 10,
+    "type": "mc",
+    "text": "다음 건축물 중 익공식(翼工式)에 속하는 것은?",
+    "answer": "강릉 오죽헌",
+    "explanation": "익공식 = 오죽헌\n서울 동대문·봉정사 대웅전 = 다포식\n무위사 극락전 = 주심포식",
+    "options": [
+      "강릉 오죽헌",
+      "서울 동대문",
+      "봉정사 대웅전",
+      "무위사 극락전"
+    ],
+    "비고": "2017-09-23"
+  },
+  {
+    "id": 11,
+    "type": "mc",
+    "text": "다음 중 사무소 건축에서 기둥간격(span)의 결정요소와 가장 관계가 먼 것은?",
+    "answer": "건물의 외관",
+    "explanation": "사무소 기둥간격과 무관한 것: 외관 및 경관, 작업능률, 최소피난거리, 엘리베이터 수",
+    "options": [
+      "건물의 외관",
+      "주차배치의 단위",
+      "책상배치의 단위",
+      "채광상 층고에 의한 안깊이"
+    ],
+    "비고": "2018-03-04"
+  },
+  {
+    "id": 12,
+    "type": "mc",
+    "text": "아파트의 평면형식에 관한 설명으로 옳지 않은 것은?",
+    "answer": "집중형은 공용 부분이 오픈되어 있으므로, 공용 부분에 별도의 기계적 설비계획이 필요없다.",
+    "explanation": "집중형은 공용 부분이 오픈되어 있지 않으므로, 별도의 기계적 설비계획이 필요하다.",
+    "options": [
+      "중복도형은 모든 세대의 향을 동일하게 할 수 없다.",
+      "편복도형은 각 세대의 거주성이 균일한 배치 구성이 가능하다.",
+      "홀형은 각 세대가 양쪽으로 개구부를 계획할 수 있는 관계로 일조와 통풍이 양호하다.",
+      "집중형은 공용 부분이 오픈되어 있으므로, 공용 부분에 별도의 기계적 설비계획이 필요없다."
+    ],
+    "비고": "2018-03-04"
+  },
+  {
+    "id": 13,
+    "type": "mc",
+    "text": "다음 중 다포양식의 건축물이 아닌 것은?",
+    "answer": "무위사 극락전",
+    "explanation": "무위사 극락전 = 주심포식\n다포양식 암기: 고려(봉수객부), 조선(무송)\n대웅전·근정전은 격식있는 다포양식 사용.",
+    "options": [
+      "내소사 대웅전",
+      "경복궁 근정전",
+      "전등사 대웅전",
+      "무위사 극락전"
+    ],
+    "비고": "2018-03-04"
+  },
+  {
+    "id": 14,
+    "type": "mc",
+    "text": "다음 중 백화점의 기둥간격 결정요소와 가장 거리가 먼 것은?",
+    "answer": "화장실의 크기",
+    "explanation": "백화점 기둥간격 결정요소: 가구배치단위(진열장), 에스컬레이터, 지하주차 단위\n화장실의 크기는 무관.",
+    "options": [
+      "화장실의 크기",
+      "에스컬레이터의 배치방법",
+      "매장 진열장의 치수와 배치방법",
+      "지하주차장의 주차방식과 주차폭"
+    ],
+    "비고": "2018-04-28"
+  },
+  {
+    "id": 15,
+    "type": "mc",
+    "text": "다음 중 사무소 건축의 기준층 층고 결정요소와 가장 거리가 먼 것은?",
+    "answer": "계단의 형태",
+    "explanation": "기준층 층고 결정요소(6가지): 채광률, 사무실의 깊이, 건물의 높이제한과 층수, 공기조화, 사용목적, 공사비\n계단의 형태는 무관.",
+    "options": [
+      "채광률",
+      "사용목적",
+      "계단의 형태",
+      "공조시스템의 유형"
+    ],
+    "비고": "2018-09-15"
+  },
+  {
+    "id": 16,
+    "type": "mc",
+    "text": "다음 중 터미널 호텔의 종류에 속하지 않은 것은?",
+    "answer": "해변 호텔",
+    "explanation": "터미널호텔 = 교통중심 호텔 (부두, 공항, 철도역)\n해변 호텔은 리조트 호텔에 해당.",
+    "options": [
+      "해변 호텔",
+      "부두 호텔",
+      "공항 호텔",
+      "철도역 호텔"
+    ],
+    "비고": "2018-09-15"
+  },
+  {
+    "id": 17,
+    "type": "mc",
+    "text": "다음과 같은 특징을 갖는 그리스 건축의 오더는? - 주두는 에키누스와 아바쿠스로 구성된다. - 육중하고 엄정한 모습을 지니는 남성적인 오더이다.",
+    "answer": "도리스 오더",
+    "explanation": "도리스: 단순·장중·남성적\n이오니아: 소용돌이 주두·우아·경쾌·여성적\n코린트: 아칸더스 잎 장식·화려\n컴포지트: 이오니아+코린트 혼합",
+    "options": [
+      "코린트 오더",
+      "도리스 오더",
+      "이오니아 오더",
+      "컴포지트 오더"
+    ],
+    "비고": "2018-09-15"
+  },
+  {
+    "id": 18,
+    "type": "mc",
+    "text": "이슬람교의 영향을 받은 건축물에서 볼 수 있는 연속적인 기하학적 문양, 식물문양, 당초문양 등을 이르는 용어는?",
+    "answer": "아라베스크",
+    "explanation": "아라베스크: 이슬람 건축에서 볼 수 있는 연속적 기하학적·식물·당초 문양.\n[연상] 이슬람 → 아라비안나이트 → 아라베스크",
+    "options": [
+      "스퀸치",
+      "펜던티브",
+      "모자이크",
+      "아라베스크"
+    ],
+    "비고": "2019-03-03"
+  },
+  {
+    "id": 19,
+    "type": "mc",
+    "text": "공동주택을 건설하는 주택단지의 총세대수가 400세대인 경우, 기간도로와 접하는 폭 또는 진입도로의 폭은 최소 얼마 이상이어야 하는가? (진입도로 1개, 원룸형 아닌 경우)",
+    "answer": "8m",
+    "explanation": "300세대 미만: 6m\n300~500세대 미만: 8m\n500~1000세대 미만: 12m",
+    "options": [
+      "4m",
+      "6m",
+      "8m",
+      "12m"
+    ],
+    "비고": "2019-03-03"
+  },
+  {
+    "id": 20,
+    "type": "mc",
+    "text": "미술관의 전시기법 중 전시평면이 동일한 공간으로 연속 배치되며, 동일 종류의 전시물을 반복 전시할 경우 유리한 방식은?",
+    "answer": "하모니카 전시",
+    "explanation": "하모니카 전시: 동일 공간 연속 배치, 반복 전시에 유리.\n파노라마: 연속 주제를 선적으로 연계.\n디오라마: 시간·상황을 고정 연출.\n아일랜드: 벽·천장 미이용, 전시물 독립 배치.",
+    "options": [
+      "디오라마 전시",
+      "파노라마 전시",
+      "하모니카 전시",
+      "아일랜드 전시"
+    ],
+    "비고": "2019-03-03"
+  },
+  {
+    "id": 21,
+    "type": "mc",
+    "text": "주택의 부엌 계획에 관한 설명으로 옳지 않은 것은?",
+    "answer": "작업 삼각형은 냉장고와 개수대 그리고 배선대를 잇는 삼각형이다.",
+    "explanation": "작업 삼각형: 냉장고(또는 준비대) → 개수대 → 조리대(또는 가열대)\n배선대는 작업 삼각형에 포함되지 않음.",
+    "options": [
+      "일사가 긴 서쪽은 음식물이 부패하기 쉬우므로 피하도록 한다.",
+      "작업 삼각형은 냉장고와 개수대 그리고 배선대를 잇는 삼각형이다.",
+      "부엌가구 배치유형 중 ㄱ자형은 부엌과 식당을 겸할 경우 많이 활용된다.",
+      "부엌가구 배치유형 중 일렬형은 면적이 좁은 경우 효과적이므로 소규모 부엌에 주로 활용된다."
+    ],
+    "비고": "2019-04-27"
+  },
+  {
+    "id": 22,
+    "type": "mc",
+    "text": "봉정사 극락전에 관한 설명으로 옳지 않은 것은?",
+    "answer": "지붕은 팔작지붕의 형태를 띠고 있다.",
+    "explanation": "봉정사 극락전은 팔작지붕이 아닌 맞배지붕.\n(맞배지붕은 주심포 양식에 주로 적용)\n현존 가장 오래된 목조 건축물, 주심포 양식.",
+    "options": [
+      "지붕은 팔작지붕의 형태를 띠고 있다.",
+      "공포를 주상에만 짜놓은 주심포 양식의 건축물이다.",
+      "우리나라에 현존하는 목조 건축물 중 가장 오래된 것이다.",
+      "정면 3칸에 측면 4칸의 규모이며 서남향으로 배치되어 있다."
+    ],
+    "비고": "2019-04-27"
+  },
+  {
+    "id": 23,
+    "type": "mc",
+    "text": "아파트의 평면형식에 관한 설명으로 옳지 않은 것은?",
+    "answer": "중복도형은 부지의 이용률이 적다.",
+    "explanation": "중복도형 특징: 부지 이용률 높음, 통풍·채광 불리, 프라이버시 불리.\n①의 '이용률이 적다'는 틀린 설명.",
+    "options": [
+      "중복도형은 부지의 이용률이 적다.",
+      "홀형(계단실형)은 독립성(privacy)이 우수하다.",
+      "집중형은 복도부분 자연환기, 채광이 극히 나쁘다.",
+      "편복도형은 복도를 외기에 터놓으면 통풍·채광이 중복도형보다 양호하다."
+    ],
+    "비고": "2019-04-27"
+  },
+  {
+    "id": 24,
+    "type": "mc",
+    "text": "학교의 배치형식 중 분산병렬형에 관한 설명으로 옳지 않은 것은?",
+    "answer": "부지의 크기에 상관없이 적용이 용이하다.",
+    "explanation": "분산병렬형은 넓은 부지가 필요하므로 부지 크기에 상관없이 적용 가능하다는 설명은 틀림.",
+    "options": [
+      "일종의 핑거 플랜이다.",
+      "구조계획이 간단하고 시공이 용이하다.",
+      "부지의 크기에 상관없이 적용이 용이하다.",
+      "일조·통풍 등 교실의 환경조건을 균등하게 할 수 있다."
+    ],
+    "비고": "2019-04-27"
+  },
+  {
+    "id": 25,
+    "type": "mc",
+    "text": "미술관 전시공간의 순회형식 중 갤러리 및 코리더 형식에 관한 설명으로 옳은 것은?",
+    "answer": "복도의 일부를 전시장으로 사용할 수 있다.",
+    "explanation": "①갤러리·코리더 형식: 복도 일부를 전시장으로 사용 가능.\n②연속순로 형식 설명.\n③④중앙홀 형식 설명.",
+    "options": [
+      "복도의 일부를 전시장으로 사용할 수 있다.",
+      "전시실 중 하나의 실을 폐쇄하면 동선이 단절된다는 단점이 있다.",
+      "중앙에 커다란 홀을 계획하고 그 홀에 접하여 전시실을 배치한 형식이다.",
+      "대표적 건축물로는 뉴욕 근대 미술관과 구겐하임 미술관이 있다."
+    ],
+    "비고": "2019-04-27"
+  },
+  {
+    "id": 26,
+    "type": "mc",
+    "text": "다음 중 건축가와 작품의 연결이 옳지 않은 것은?",
+    "answer": "미스 반 데어 로에 - 뉴욕 레버하우스",
+    "explanation": "뉴욕 레버하우스 건축가: 고든 번샤프트(Gordon Bunshaft)\n미스 반 데어 로에 주요 작품: 바르셀로나 파빌리온, 투켄하트 주택, 시그램 빌딩, 크라운 홀.",
+    "options": [
+      "르 꼬르뷔지에 - 사보이 주택",
+      "오스카 니마이어 - 브라질 국회의사당",
+      "미스 반 데어 로에 - 뉴욕 레버하우스",
+      "프랭크 로이드 라이트 - 뉴욕 구겐하임 미술관"
+    ],
+    "비고": "2019-04-27"
+  },
+  {
+    "id": 27,
+    "type": "mc",
+    "text": "도서관 출납시스템에 관한 설명으로 옳지 않은 것은?",
+    "answer": "자유개가식은 이용자가 자유롭게 도서를 꺼낼 수 있으나 열람석으로 가기 전에 관원에게 체크를 받는 형식이다.",
+    "explanation": "④는 안전개가식에 대한 설명.\n자유개가식: 이용자가 자유롭게 도서를 꺼내고 열람석도 자유롭게 이용 가능.",
+    "options": [
+      "폐가식은 서고와 열람실이 분리되어 있다.",
+      "반개가식은 새로 출간된 신간 서적 안내에 채용된다.",
+      "안전개가식은 서가 열람이 가능하여 도서를 직접 뽑을 수 있다.",
+      "자유개가식은 이용자가 자유롭게 도서를 꺼낼 수 있으나 열람석으로 가기 전에 관원에게 체크를 받는 형식이다."
+    ],
+    "비고": "2019-09-21"
+  },
+  {
+    "id": 28,
+    "type": "mc",
+    "text": "장애인·노인·임산부 등의 편의증진 보장에 관한 법령상 매개시설에 속하지 않는 것은?",
+    "answer": "유도 및 안내설비",
+    "explanation": "매개시설: 주출입구 접근로, 장애인전용주차구역, 주출입구 높이차이제거 등.\n유도 및 안내설비는 안내시설에 해당.",
+    "options": [
+      "주출입구접근로",
+      "유도 및 안내설비",
+      "장애인전용주차구역",
+      "주출입구높이차이제거"
+    ],
+    "비고": "2019-09-21"
+  },
+  {
+    "id": 29,
+    "type": "mc",
+    "text": "그리스 아테네 아크로폴리스에 관한 설명으로 옳지 않은 것은?",
+    "answer": "니케 신전은 순수한 코린트식 양식으로서 페르시아와의 전쟁 승리기념으로 세워졌다.",
+    "explanation": "니케 신전은 코린트식이 아닌 이오니아식 양식.",
+    "options": [
+      "프로필리어는 아크로폴리스로 들어가는 입구 건물이다.",
+      "에렉테이온 신전은 이오닉 양식의 대표적인 신전으로 부정형 평면으로 구성되어 있다.",
+      "니케 신전은 순수한 코린트식 양식으로서 페르시아와의 전쟁 승리기념으로 세워졌다.",
+      "파르테논 신전은 도릭 양식의 대표적인 신전으로서 그리스 고전건축을 대표하는 건물이다."
+    ],
+    "비고": "2019-09-21"
+  },
+  {
+    "id": 30,
+    "type": "mc",
+    "text": "다음 중 건축가와 작품의 연결이 옳지 않은 것은?",
+    "answer": "미스 반 데르 로에 - M.I.T 공대 기숙사",
+    "explanation": "M.I.T 공대 기숙사(베이커 하우스): 알바 알토 작품.\n미스 반 데어 로에 주요 작품: 바르셀로나 파빌리온, 시그램 빌딩, 일리노이 공과대학 크라운 홀.",
+    "options": [
+      "르 꼬르뷔지에 - 롱샹 교회",
+      "월터 그로피우스 - 아테네 미국대사관",
+      "프랭크 로이드 라이트 - 구겐하임 미술관",
+      "미스 반 데르 로에 - M.I.T 공대 기숙사"
+    ],
+    "비고": "2019-09-21"
+  },
+  {
+    "id": 31,
+    "type": "mc",
+    "text": "건축물의 에너지절약을 위한 계획 내용으로 옳지 않은 것은?",
+    "answer": "건축물의 체적에 대한 외피면적의 비 또는 연면적에 대한 외피면적의 비는 가능한 크게 한다.",
+    "explanation": "외피면적의 비는 가능한 작게 해야 에너지 손실을 줄일 수 있음.\n(외피면적이 클수록 열손실 증가)",
+    "options": [
+      "공동주택은 인동간격을 넓게 하여 저층부의 일사 수열량을 증대시킨다.",
+      "건축물의 체적에 대한 외피면적의 비 또는 연면적에 대한 외피면적의 비는 가능한 크게 한다.",
+      "건축물은 대지의 향, 일조 및 주풍향 등을 고려하여 남향 또는 남동향 배치를 한다.",
+      "거실의 층고 및 반자 높이는 실의 용도와 기능에 지장을 주지 않는 범위 내에서 가능한 낮게 한다."
+    ],
+    "비고": "2020-06-06"
+  },
+  {
+    "id": 32,
+    "type": "mc",
+    "text": "주거단지 내의 공동시설에 관한 설명으로 옳지 않은 것은?",
+    "answer": "이용 빈도가 높은 건물은 이용거리를 길게 한다.",
+    "explanation": "이용 빈도가 높은 건물은 이용거리를 짧게 하여 동선을 줄이고 이용률을 높여야 함.",
+    "options": [
+      "중심을 형성할 수 있는 곳에 설치한다.",
+      "이용 빈도가 높은 건물은 이용거리를 길게 한다.",
+      "확장 또는 증설을 위한 용지를 확보하는 것이 좋다.",
+      "이용성, 기능상의 인접성, 토지이용의 효율성에 따라 인접하여 배치한다."
+    ],
+    "비고": "2020-06-06"
+  },
+  {
+    "id": 33,
+    "type": "mc",
+    "text": "각 사찰에 관한 설명으로 옳지 않은 것은?",
+    "answer": "통도사는 산지에 위치하나 건물들을 불규칙하게 배치하지 않고 직교식으로 배치하였다.",
+    "explanation": "통도사는 산지가람 형식으로 불규칙한 배치.\n(평지가람: 송광사, 통도사 / 산지가람: 해인사, 쌍계사, 범어사 — 이견 있는 문제)",
+    "options": [
+      "부석사의 가람배치는 누하진입 형식을 취하고 있다.",
+      "화엄사는 경사된 지형을 수단으로 나누어 정지하여 건물을 배치하였다.",
+      "통도사는 산지에 위치하나 건물들을 불규칙하게 배치하지 않고 직교식으로 배치하였다.",
+      "봉정사 가람배치는 대지가 3단으로 나누어지며 상단에 대웅전과 극락전 등 중요 건물이 배치되어 있다."
+    ],
+    "비고": "2020-06-06"
+  },
+  {
+    "id": 34,
+    "type": "mc",
+    "text": "백화점의 에스컬레이터 배치형식에 관한 설명으로 옳은 것은?",
+    "answer": "교차식 배치는 점유면적이 작으며 연속 승강이 가능하다는 장점이 있다.",
+    "explanation": "직렬식: 시야 좋으나 점유면적 가장 큼.\n병렬연속식: 연속 승강 가능.\n교차식: 점유면적 가장 작고 연속 승강 가능.\n병렬단속식: 시야 양호하나 점유면적 큼.",
+    "options": [
+      "직렬식 배치는 승객의 시야도 좋고 점유면적도 작다.",
+      "병렬연속식 배치는 연속적으로 승강할 수 없다는 단점이 있다.",
+      "교차식 배치는 점유면적이 작으며 연속 승강이 가능하다는 장점이 있다.",
+      "병렬단속식 배치는 승객의 시야는 안 좋으나 점유면적이 작아 고층 백화점에 주로 사용된다."
+    ],
+    "비고": "2020-06-06"
+  },
+  {
+    "id": 35,
+    "type": "mc",
+    "text": "바실리카식 교회당의 각부 명칭과 관계없는 것은?",
+    "answer": "파일론(Pylon)",
+    "explanation": "파일론: 고대 이집트 신전 앞 탑 모양의 문으로 바실리카와 무관.\n바실리카 구성: 아일, 나르텍스, 트란셉트, 앱스, 네이브.",
+    "options": [
+      "아일(Aisle)",
+      "파일론(Pylon)",
+      "나르텍스(Narthex)",
+      "트란셉트(Transept)"
+    ],
+    "비고": "2020-06-06"
+  },
+  {
+    "id": 36,
+    "type": "mc",
+    "text": "사무소 건축의 실단위 계획 중 개실 시스템에 관한 설명으로 옳지 않은 것은?",
+    "answer": "공사비가 저렴하다.",
+    "explanation": "개실 시스템: 독립성·쾌적성 높음, 자연채광 유리, 공사비 많이 듦, 방 깊이 변화 없음.\n개방 시스템: 공사비 절약, 방 깊이·길이 변화 가능, 소음·독립성 불리.",
+    "options": [
+      "공사비가 저렴하다.",
+      "독립성과 쾌적감이 높다.",
+      "방길이에 변화를 줄 수 있다.",
+      "방깊이에 변화를 줄 수 없다."
+    ],
+    "비고": "2020-09-26"
+  },
+  {
+    "id": 37,
+    "type": "mc",
+    "text": "단독주택에서 다음 실들을 각각 직상층 및 직하층에 배치할 경우 가장 바람직하지 않은 것은?",
+    "answer": "상층: 욕실, 하층: 침실",
+    "explanation": "상층 욕실, 하층 침실: 배관 소음·누수 문제로 바람직하지 않음.\n욕실과 침실은 같은 층에 두는 것이 적합.",
+    "options": [
+      "상층: 침실, 하층: 침실",
+      "상층: 부엌, 하층: 욕실",
+      "상층: 욕실, 하층: 침실",
+      "상층: 욕실, 하층: 부엌"
+    ],
+    "비고": "2020-09-26"
+  },
+  {
+    "id": 38,
+    "type": "mc",
+    "text": "고대 로마 건축물 중 판테온(Pantheon)에 관한 설명으로 옳지 않은 것은?",
+    "answer": "드럼 하부는 깊은 니치와 독립된 도리아식 기둥들로 동적인 공간을 구현한다.",
+    "explanation": "판테온 현관 기둥: 도리아식이 아닌 코린트식 기둥 8개.\n드럼 상부: 깊은 벽감(니치), 드럼 하부: 코린트식 기둥으로 역동적 구성.",
+    "options": [
+      "로툰다 내부는 드럼과 돔 두 부분으로 구성된다.",
+      "직사각형의 입구 공간은 외부와 내부 사이의 전이공간으로 사용된다.",
+      "드럼 하부는 깊은 니치와 독립된 도리아식 기둥들로 동적인 공간을 구현한다.",
+      "거대한 돔을 얹은 로툰다와 대형 열주 현관이라는 2가지 주된 구성 요소로 이루어진다."
+    ],
+    "비고": "2020-09-26"
+  },
+  {
+    "id": 39,
+    "type": "mc",
+    "text": "고딕 성당에 관한 설명으로 옳지 않은 것은?",
+    "answer": "중앙집중식 배치를 지배적으로 사용하였다.",
+    "explanation": "중앙집중식 배치는 비잔틴 양식의 특징.\n고딕 성당은 수직성 강조, 라틴 십자형 평면 사용.",
+    "options": [
+      "중앙집중식 배치를 지배적으로 사용하였다.",
+      "건축 형태에서 수직성을 강하게 강조하였다.",
+      "고딕 성당으로는 랭스 성당, 아미앵 성당 등이 있다.",
+      "수평 방향으로 통일되고 연속적인 공간을 만들었다."
+    ],
+    "비고": "2020-09-26"
+  },
+  {
+    "id": 40,
+    "type": "mc",
+    "text": "공장건축의 레이아웃(Lay out)에 관한 설명으로 옳지 않은 것은?",
+    "answer": "레이아웃이란 생산품의 특성에 따른 공장의 건축면적 결정 방식을 말한다.",
+    "explanation": "레이아웃: 공장 내 기계나 설비의 배치 방법을 결정하는 것.\n(건축면적 결정 방식이 아님)",
+    "options": [
+      "제품중심의 레이아웃은 대량생산에 유리하며 생산성이 높다.",
+      "레이아웃이란 생산품의 특성에 따른 공장의 건축면적 결정 방식을 말한다.",
+      "공정중심의 레이아웃은 다종 소량생산으로 표준화가 행해지기 어려운 경우에 적합하다.",
+      "고정식 레이아웃은 조선소와 같이 조립부품이 고정된 장소에 있고 사람과 기계를 이동시키며 작업을 행하는 방식이다."
+    ],
+    "비고": "2021-03-07"
+  },
+  {
+    "id": 41,
+    "type": "mc",
+    "text": "다음과 같은 특징을 갖는 에스컬레이터 배치 유형은? - 점유면적이 다른 유형에 비해 작다. - 연속적으로 승강이 가능하다. - 승객이 시야가 좋지 않다.",
+    "answer": "교차식 배치",
+    "explanation": "교차식: 시야 가장 불량, 점유면적 가장 작음.\n직렬식: 시야 가장 좋음, 점유면적 큼.\n병렬단속식: 시야 양호, 점유면적 큼.\n병렬연속식: 시야 보통, 점유면적 작음.",
+    "options": [
+      "교차식 배치",
+      "직렬식 배치",
+      "병렬 단속식 배치",
+      "병렬 연속식 배치"
+    ],
+    "비고": "2021-03-07"
+  },
+  {
+    "id": 42,
+    "type": "mc",
+    "text": "다음 중 다포식(多包式) 건축으로 가장 오래된 것은?",
+    "answer": "심원사 보광전",
+    "explanation": "심원사 보광전: 고려 후기 다포식 건축물 중 가장 오래된 것.\n(창경궁 명정전·전등사 대웅전은 조선 중기)\n가장 오래된 목조+주심포 건축물: 봉정사 극락전.",
+    "options": [
+      "창경궁 명정전",
+      "전등사 대웅전",
+      "불국사 극락전",
+      "심원사 보광전"
+    ],
+    "비고": "2021-03-07"
+  },
+  {
+    "id": 43,
+    "type": "mc",
+    "text": "고대 그리스의 기둥 양식에 속하지 않는 것은?",
+    "answer": "컴포지트식",
+    "explanation": "그리스 3대 오더: 도리아식, 이오니아식, 코린트식.\n컴포지트식(복합식)은 로마 건축의 오더.\n(로마 5오더: 그리스 3 + 컴포지트 + 터스칸)",
+    "options": [
+      "도리아식",
+      "코린트식",
+      "컴포지트식",
+      "이오니아식"
+    ],
+    "비고": "2021-03-07"
+  },
+  {
+    "id": 44,
+    "type": "mc",
+    "text": "주택의 부엌 작업대 배치유형 중 ㄷ자형에 관한 설명으로 옳은 것은?",
+    "answer": "평면계획상 외부로 통하는 출입구의 설치가 곤란하다.",
+    "explanation": "ㄷ자형: 중심에 개수대, 좌우에 조리대·가열대 배치. 가장 효율적, 불필요한 통행 없어 동선 절약. 좁은 부엌에 부적합.\n①병렬형 ③일렬형 ④일렬형 설명.",
+    "options": [
+      "두 벽면을 따라 작업이 전개되는 전통적인 형태이다.",
+      "평면계획상 외부로 통하는 출입구의 설치가 곤란하다.",
+      "작업동선이 길고 조리면적은 좁지만 다수의 인원이 함께 작업할 수 있다.",
+      "가장 간결하고 기본적인 설계형태로 길이가 4.5m 이상이 되면 동선이 비효율적이다."
+    ],
+    "비고": "2021-05-15"
+  },
+  {
+    "id": 45,
+    "type": "mc",
+    "text": "주심포 형식에 관한 설명으로 옳지 않은 것은?",
+    "answer": "장혀는 긴 것을 사용하고 평방이 사용된다.",
+    "explanation": "주심포 형식: 단장혀(짧은 장혀) 사용, 평방 미사용.\n다포 형식: 긴 장혀 사용, 평방 사용.",
+    "options": [
+      "공포를 기둥 위에만 배열한 형식이다.",
+      "장혀는 긴 것을 사용하고 평방이 사용된다.",
+      "봉정사 극락전, 수덕사 대웅전 등에서 볼 수 있다.",
+      "맞배지붕이 대부분이며 천장을 특별히 가설하지 않아 서까래가 노출되어 보인다."
+    ],
+    "비고": "2021-05-15"
+  },
+  {
+    "id": 46,
+    "type": "mc",
+    "text": "페리(C. A. Perry)의 근린주구에 관한 설명으로 옳지 않은 것은?",
+    "answer": "공공시설용지: 지구 전체에 분산하여 배치",
+    "explanation": "페리의 근린주구: 공공시설용지(학교 포함)는 주구의 중심 부근에 집중 배치.\n(분산 배치가 아님)",
+    "options": [
+      "경계: 4면의 간선도로에 의해 구획",
+      "공공시설용지: 지구 전체에 분산하여 배치",
+      "오픈 스페이스: 주민의 일상생활 요구를 충족시키기 위한 소공원과 위락공간체계",
+      "지구 내 가로체계: 내부 가로망은 단지 내의 교통량을 원활히 처리하고 통과 교통을 방지"
+    ],
+    "비고": "2021-05-15"
+  },
+  {
+    "id": 47,
+    "type": "mc",
+    "text": "고딕양식의 건축물에 속하지 않는 것은?",
+    "answer": "성 베드로 성당",
+    "explanation": "성 베드로 성당: 르네상스~바로크 양식 (여러 건축가가 오랜 세월에 걸쳐 건축).\n고딕 성당: 노트르담, 샤르트르, 아미앵, 밀라노 대성당 등.",
+    "options": [
+      "아미앵 성당",
+      "노트르담 성당",
+      "샤르트르 성당",
+      "성 베드로 성당"
+    ],
+    "비고": "2021-05-15"
+  },
+  {
+    "id": 48,
+    "type": "mc",
+    "text": "단독주택의 리빙 다이닝 키친에 관한 설명으로 옳지 않은 것은?",
+    "answer": "거실과 식당이 분리되어 각 실의 분위기 조성이 용이하다.",
+    "explanation": "리빙 다이닝 키친(LDK): 거실·식당·부엌이 하나의 공간에 통합된 구조.\n거실과 식당이 분리되지 않음.",
+    "options": [
+      "공간의 이용률이 높다.",
+      "소규모 주택에 주로 사용된다.",
+      "주부의 동선이 짧아 노동력이 절감된다.",
+      "거실과 식당이 분리되어 각 실의 분위기 조성이 용이하다."
+    ],
+    "비고": "2021-05-15"
+  },
+  {
+    "id": 49,
+    "type": "mc",
+    "text": "레이트 모던(Late Modern) 건축양식에 관한 설명으로 옳지 않은 것은?",
+    "answer": "기호학적 분절을 추구하였다.",
+    "explanation": "기호학적 분절 추구는 포스트 모던(Post Modern) 특징.\n레이트 모던: 공업기술·기계미학 강조, 퐁피두 센터, 시저 펠리·노만 포스터.",
+    "options": [
+      "기호학적 분절을 추구하였다.",
+      "퐁피두 센터는 이 양식에 부합되는 건축물이다.",
+      "공업기술을 바탕으로 기술적 이미지를 강조하였다.",
+      "대표적 건축가로는 시저 펠리, 노만 포스터 등이 있다."
+    ],
+    "비고": "2022-03-05"
+  },
+  {
+    "id": 50,
+    "type": "mc",
+    "text": "다음 중 백화점 건물의 기둥간격 결정요소와 가장 거리가 먼 것은?",
+    "answer": "고객 동선의 길이",
+    "explanation": "백화점 기둥간격 결정요소: 진열대 치수·배치, 에스컬레이터·엘리베이터 배치, 통로 크기, 지하주차장.\n고객 동선의 길이는 무관.",
+    "options": [
+      "진열장의 치수",
+      "고객 동선의 길이",
+      "에스컬레이터의 배치",
+      "지하주차장의 주차방식"
+    ],
+    "비고": "2022-03-05"
+  },
+  {
+    "id": 51,
+    "type": "mc",
+    "text": "르 꼬르뷔지에가 주장한 근대건축 5원칙에 속하지 않는 것은?",
+    "answer": "유기적 공간",
+    "explanation": "르 꼬르뷔지에 근대건축 5원칙: 필로티, 자유로운 평면, 자유로운 파사드(입면), 수평으로 긴 창, 옥상정원.\n유기적 공간은 포함되지 않음.",
+    "options": [
+      "필로티",
+      "옥상정원",
+      "유기적 공간",
+      "자유로운 평면"
+    ],
+    "비고": "2022-03-05"
+  },
+  {
+    "id": 52,
+    "type": "mc",
+    "text": "다음 중 사무소 건축의 기둥간격 결정 요소와 가장 거리가 먼 것은?",
+    "answer": "엘리베이터의 설치 대수",
+    "explanation": "사무소 기둥간격 결정요소: 책상 배치 단위, 채광상 층고에 의한 안 깊이, 주차 배치 단위.\n엘리베이터 설치 대수는 무관.",
+    "options": [
+      "책상배치의 단위",
+      "주차배치의 단위",
+      "엘리베이터의 설치 대수",
+      "채광상 층높이에 의한 깊이"
+    ],
+    "비고": "2022-04-24"
+  },
+  {
+    "id": 53,
+    "type": "mc",
+    "text": "다음 중 주심포식 건물이 아닌 것은?",
+    "answer": "서울 남대문",
+    "explanation": "서울 남대문은 다포식 건물.\n주심포식: 봉정사 극락전, 부석사 무량수전, 수덕사 대웅전, 무위사 극락전, 강릉 객사문.",
+    "options": [
+      "강릉 객사문",
+      "서울 남대문",
+      "수덕사 대웅전",
+      "무위사 극락전"
+    ],
+    "비고": "2022-04-24"
+  },
+  {
+    "id": 54,
+    "type": "mc",
+    "text": "그리스 건축의 오더 중 도릭 오더의 구성에 속하지 않는 것은?",
+    "answer": "볼류트(volute)",
+    "explanation": "볼류트(소용돌이 장식): 이오니아 오더의 대표 구성 요소.\n도릭 오더 구성: 아바쿠스, 에키누스, 프리즈(트리글리프·메토프) 등.",
+    "options": [
+      "볼류트(volute)",
+      "프리즈(frieze)",
+      "아바쿠스(abacus)",
+      "에키누스(echinus)"
+    ],
+    "비고": "2022-04-24"
+  }
+]
+</script>
+
+<script>
+(function(){
+  var QS  = JSON.parse(document.getElementById('qdata').textContent);
+  var SK  = 'posco_sel_mc_1';
+  var tab = 'all', fil = 'all';
+  var retrySet = null; 
+  var st  = {a:{}, f:{}, o:[]};
+
+  function initOrder(){ st.o = QS.map(function(q){ return String(q.id); }); }
+  initOrder();
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(SK);
+      if(!raw) return;
+      var p = JSON.parse(raw);
+      if(p.a) st.a = p.a;
+      if(p.f) st.f = p.f;
+      if(p.o && p.o.length === QS.length) st.o = p.o;
+    }catch(e){}
+  }
+  function save(){
+    try{ localStorage.setItem(SK, JSON.stringify(st)); }catch(e){}
+  }
+
+  function getQ(id){
+    var sid = String(id);
+    for(var i=0; i<QS.length; i++){ if(String(QS[i].id)===sid) return QS[i]; }
+    return null;
+  }
+
+  function esc(s){
+    return String(s||'')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function updateStats(){
+    var ak=Object.keys(st.a), ok=0, ng=0;
+    for(var i=0;i<ak.length;i++){ if(st.a[ak[i]].correct) ok++; else ng++; }
+    var fk=Object.keys(st.f), fv=0;
+    for(var i=0;i<fk.length;i++){ if(st.f[fk[i]]) fv++; }
+    document.getElementById('sc').textContent = ok;
+    document.getElementById('sw').textContent = ng;
+    document.getElementById('sf').textContent = fv;
+    var done = ak.length, total = QS.length;
+    document.getElementById('ptxt').textContent = done+' / '+total+' 완료';
+    document.getElementById('pb').style.width   = (total > 0 ? (done/total*100) : 0)+'%';
+  }
+
+  function allOrderedQs(){
+    var out=[];
+    for(var i=0;i<st.o.length;i++){ var q=getQ(st.o[i]); if(q) out.push(q); }
+    return out;
+  }
+
+  function applyFilter(qs){
+    return qs.filter(function(q){
+      var k=String(q.id);
+      if(fil==='mc' && q.type!=='mc') return false;
+      if(fil==='un' && st.a[k])       return false;
+      return true;
+    });
+  }
+
+  function rq(q){
+    var k   = String(q.id);
+    var ans = st.a[k];
+    var fav = !!st.f[k];
+    var done= !!ans;
+
+    var ind = done
+      ? (ans.correct
+          ? '<span class="ind io">&#10003; 정답</span>'
+          : '<span class="ind ix">&#10007; 오답</span>')
+      : '<span class="ind ip">미완료</span>';
+
+    var bdg = '<span class="badge bmc">객관식</span>';
+    var favBtn = '<button class="favb'+(fav?' on':'')+'" data-k="'+k+'" onclick="APP.fav(this)">&#9733;</button>';
+
+    var inp = '';
+    var opts='', os=q.options||[];
+    for(var i=0;i<os.length;i++){
+      var sc=(ans&&ans.given===os[i])?' sel':'';
+      var d2=done?' disabled':'';
+      opts += '<button class="mo'+sc+'"'+d2+' data-k="'+k+'" data-i="'+i+'" onclick="APP.mc(this)">'
+            + '<span class="ol">'+(i+1)+'</span>'+esc(os[i])+'</button>';
+    }
+    inp = '<div class="mco">'+opts+'</div>';
+
+    var fbk = '';
+    if(done){
+      var fc = ans.correct ? 'fbk ok show' : 'fbk ng show';
+      var ic = ans.correct ? '&#9989; 정답입니다!' : '&#10060; 틀렸습니다';
+      fbk = '<div class="'+fc+'">'
+          + '<div class="fbh">'+ic+'</div>'
+          + '<div class="fba">정답: <strong>'+esc(q.answer)+'</strong></div>'
+          + '<div>'+esc(q.explanation||'')+'</div>'
+          + '</div>';
+    }
+
+    var remark = q.비고 ? '<div style="font-size:0.7rem; color:var(--mu); margin-top:5px;">[비고: '+esc(q.비고)+']</div>' : '';
+
+    return '<div class="qcard" id="qc-'+k+'">'
+      + ind
+      + '<div class="qm"><span class="qn">No.'+q.id+'</span>'+bdg+favBtn+'</div>'
+      + '<div class="qt">'+esc(q.text)+'</div>'
+      + inp + fbk + remark
+      + '</div>';
+  }
+
+  function setEl(id, qs, em){
+    var el = document.getElementById(id);
+    if(!qs.length){ el.innerHTML='<div class="empty">'+em+'</div>'; return; }
+    var p=[];
+    for(var i=0;i<qs.length;i++) p.push(rq(qs[i]));
+    el.innerHTML = p.join('');
+  }
+
+  function renderAll(){
+    setEl('ql', applyFilter(allOrderedQs()), '해당 조건의 문제가 없습니다.');
+    updateStats();
+  }
+
+  function renderFav(){
+    var qs = retrySet
+      ? QS.filter(function(q){ return !!retrySet[String(q.id)]; })
+      : QS.filter(function(q){ return !!st.f[String(q.id)]; });
+
+    var stopBtn = document.getElementById('stop-fav');
+    if(stopBtn) stopBtn.style.display = retrySet ? '' : 'none';
+
+    if(!qs.length){
+      document.getElementById('fl').innerHTML =
+        '<div class="empty">즐겨찾기한 문제가 없습니다. &#9733; 버튼을 눌러 추가하세요.</div>';
+      updateStats(); return;
+    }
+    var p=[];
+    for(var i=0;i<qs.length;i++) p.push(rq(qs[i]));
+    document.getElementById('fl').innerHTML = p.join('');
+    updateStats();
+  }
+
+  function renderWrong(){
+    var qs = retrySet
+      ? QS.filter(function(q){ return !!retrySet[String(q.id)]; })
+      : QS.filter(function(q){ var a=st.a[String(q.id)]; return a&&!a.correct; });
+
+    var stopBtn = document.getElementById('stop-wrong');
+    if(stopBtn) stopBtn.style.display = retrySet ? '' : 'none';
+
+    if(!qs.length){
+      document.getElementById('wl').innerHTML = '<div class="empty">&#127881; 틀린 문제가 없습니다!</div>';
+      updateStats(); return;
+    }
+    var p=[];
+    for(var i=0;i<qs.length;i++) p.push(rq(qs[i]));
+    document.getElementById('wl').innerHTML = p.join('');
+    updateStats();
+  }
+
+  function redraw(){
+    if(tab==='all')        renderAll();
+    else if(tab==='fav')   renderFav();
+    else                   renderWrong();
+  }
+
+  window.APP = {
+    mc: function(btn){
+      var k=btn.dataset.k, i=parseInt(btn.dataset.i,10);
+      var q=getQ(k); if(!q) return;
+      var g=(q.options||[])[i];
+      st.a[k]={given:g, correct:g===q.answer};
+      save(); redraw();
+    },
+    fav: function(btn){
+      var k=btn.dataset.k;
+      st.f[k]=!st.f[k];
+      save(); redraw();
+    }
+  };
+
+  window.switchTab = function(t){
+    tab=t; retrySet=null;
+    ['all','fav','wrong'].forEach(function(x){
+      document.getElementById('tb-'+x).classList.toggle('active', x===t);
+      document.getElementById('pv-'+x).style.display = x===t ? '' : 'none';
+    });
+    var sf=document.getElementById('stop-fav'),sw=document.getElementById('stop-wrong');
+    if(sf) sf.style.display='none';
+    if(sw) sw.style.display='none';
+    redraw();
+  };
+
+  window.setFilter = function(f){
+    fil=f;
+    ['all','mc','un'].forEach(function(x){
+      var el=document.getElementById('ff-'+x);
+      if(el) el.classList.toggle('on', x===f);
+    });
+    renderAll();
+  };
+
+  window.doShuffle = function(){
+    var arr=st.o.slice();
+    for(var i=arr.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=arr[i]; arr[i]=arr[j]; arr[j]=t;
+    }
+    st.o=arr; save(); renderAll();
+  };
+
+  window.doReorder = function(){
+    initOrder(); save(); renderAll();
+  };
+
+  window.retryFav = function(){
+    var qs=QS.filter(function(q){ return !!st.f[String(q.id)]; });
+    if(!qs.length){ alert('즐겨찾기한 문제가 없습니다.'); return; }
+    retrySet={};
+    qs.forEach(function(q){ retrySet[String(q.id)]=true; });
+    qs.forEach(function(q){ delete st.a[String(q.id)]; });
+    save(); renderFav();
+  };
+
+  window.retryWrong = function(){
+    var qs=QS.filter(function(q){ var a=st.a[String(q.id)]; return a&&!a.correct; });
+    if(!qs.length){ alert('틀린 문제가 없습니다.'); return; }
+    retrySet={};
+    qs.forEach(function(q){ retrySet[String(q.id)]=true; });
+    qs.forEach(function(q){ delete st.a[String(q.id)]; });
+    save(); renderWrong();
+  };
+
+  window.clearRetry = function(){
+    retrySet=null;
+    redraw();
+  };
+
+  window.confirmReset = function(){
+    if(!confirm('정말 모든 학습 기록과 즐겨찾기를 초기화할까요?')) return;
+    localStorage.removeItem(SK);
+    st={a:{},f:{},o:[]};
+    initOrder();
+    tab='all'; fil='all'; retrySet=null;
+    ['all','fav','wrong'].forEach(function(x){
+      document.getElementById('tb-'+x).classList.toggle('active', x==='all');
+      document.getElementById('pv-'+x).style.display = x==='all' ? '' : 'none';
+    });
+    ['all','mc','un'].forEach(function(x){
+      var el=document.getElementById('ff-'+x);
+      if(el) el.classList.toggle('on', x==='all');
+    });
+    var sf=document.getElementById('stop-fav'),sw=document.getElementById('stop-wrong');
+    if(sf) sf.style.display='none';
+    if(sw) sw.style.display='none';
+    updateStats(); renderAll();
+  };
+
+  load();
+  redraw();
+})();
+</script>
+</body>
+</html>
